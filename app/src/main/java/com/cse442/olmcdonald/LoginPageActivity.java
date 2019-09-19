@@ -24,23 +24,12 @@ public class LoginPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_page);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_login);
 
         ID = (EditText)findViewById(R.id.idEditText);
         Password = (EditText)findViewById(R.id.passPassword);
         LoginButton = (Button)findViewById(R.id.loginButton);
         SignUpButton = (Button)findViewById(R.id.signUpButton);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
