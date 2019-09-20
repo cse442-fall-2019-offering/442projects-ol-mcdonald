@@ -14,32 +14,33 @@ import android.widget.TextView;
  * @Author Jonathan
  */
 public class Farmer extends AppCompatActivity {
-    TextView amount;
-    TextView address;
-    TextView description;
-    TextView price;
-    TextView product;
-    Button submit;
+    private TextView amount;
+    private TextView address;
+    private TextView description;
+    private TextView price;
+    private TextView product;
+    private Button submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer);
 
-        amount = findViewById(R.id.Amount);
-        address = findViewById(R.id.Address);
-        description = findViewById(R.id.Description);
-        price = findViewById(R.id.Price);
-        product = findViewById(R.id.Product);
-        submit = findViewById(R.id.SubmitBtn);
+        amount = (TextView) findViewById(R.id.Amount);
+        address = (TextView) findViewById(R.id.Address);
+        description = (TextView) findViewById(R.id.Description);
+        price = (TextView) findViewById(R.id.Price);
+        product = (TextView) findViewById(R.id.Product);
+        submit = (Button) findViewById(R.id.SubmitBtn);
 
+    }
+    public void submit_button(View view) {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    submit.setText("Added to market!");
+                submit.setText("ADDED TO MARKET!");
             }
         });
-
 
     }
 }
