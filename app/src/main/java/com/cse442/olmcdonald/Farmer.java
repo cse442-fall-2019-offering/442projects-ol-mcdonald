@@ -20,6 +20,7 @@ public class Farmer extends AppCompatActivity {
     private TextView price;
     private TextView product;
     private Button submit;
+    private Button upload;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class Farmer extends AppCompatActivity {
         price = (TextView) findViewById(R.id.Price);
         product = (TextView) findViewById(R.id.Product);
         submit = (Button) findViewById(R.id.SubmitBtn);
-
+        //upload = (Button) findViewById(R.id.Img_Up);
     }
     public void submit_button(View view) {
         submit.setOnClickListener(new View.OnClickListener() {
@@ -42,5 +43,14 @@ public class Farmer extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void upload_img(View view) {
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                upload.setText("DONE!");
+            }
+        });
     }
 }

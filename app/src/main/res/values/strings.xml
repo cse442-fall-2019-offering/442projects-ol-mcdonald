@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Ol`McDonald</string>
-    <string name="submit_btn">Submit</string>
+    <string name="submit_btn">SUBMIT</string>
     <string name="name_of_product">Name of Product</string>
     <string name="amount_to_sell">How much will you sell?</string>
     <string name="description">Describe your product</string>
+    <string name="upload_image">UPLOAD IMAGE </string>
 </resources>

@@ -2,10 +2,25 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F3F5F4"
     tools:context=".Farmer">
+
+    <Button
+        android:id="@+id/img_Up"
+        android:layout_width="126dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="#00BCD4"
+        android:onClick="upload_img"
+        android:text="@string/upload_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/Address"
@@ -13,13 +28,13 @@
         android:layout_height="45dp"
         android:layout_marginTop="28dp"
         android:ems="10"
+        android:hint="Address"
         android:inputType="textPostalAddress"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.203"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Price"
-        tools:text="Address" />
+        app:layout_constraintTop_toBottomOf="@+id/Price" />
 
     <EditText
         android:id="@+id/Price"
@@ -27,13 +42,13 @@
         android:layout_height="46dp"
         android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="Price"
         android:inputType="number"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.158"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Amount"
-        tools:text="Price"
         tools:visibility="visible" />
 
     <Button
@@ -59,8 +74,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:ems="10"
+        android:hint="@string/name_of_product"
         android:inputType="textPersonName"
-        android:text="@string/name_of_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.202"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,8 +87,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
+        android:hint="@string/amount_to_sell"
         android:inputType="textPersonName"
-        android:text="@string/amount_to_sell"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.202"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,15 +99,17 @@
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="337dp"
         android:layout_height="165dp"
+        android:layout_marginTop="109dp"
         android:layout_marginBottom="140dp"
         android:background="@null"
         android:ems="10"
         android:gravity="start"
+        android:hint="@string/description"
         android:inputType="textPersonName"
-        android:text="@string/description"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.581"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Address" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
