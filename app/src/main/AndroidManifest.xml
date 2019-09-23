@@ -9,50 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Farmer"></activity>
-        <activity
-            android:name=".SignUpActivity"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
-            android:name=".LoginPageActivity"
-            android:label="@string/title_activity_login_page"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".peachActivity">
-
-        </activity>
-        <activity android:name=".appleActivity">
-
-        </activity>
-        <activity android:name=".blueberryActivity">
-
-        </activity>
-        <activity android:name=".cherryActivity">
-
-        </activity>
-        <activity android:name=".figpage">
-
-        </activity>
-        <activity android:name=".spinachActivity">
-
-        </activity>
-        <activity android:name=".grapeActivity">
-
-        </activity>
-        <activity android:name=".tomatoActivity">
-
-        </activity>
-        <activity android:name=".orangeActivity">
-
         </activity>
     </application>
 
