@@ -1,18 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/outer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/peachview"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+
+        android:weightSum="3"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageView18"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:srcCompat="@mipmap/peaches"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Peaches are 6 miles away!" />
+
+        <TextView
+            android:id="@+id/textView27"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$2.00 per pound" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/blueberryview"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+
+        android:clickable="true"
+        >
+
+        <ImageView
+            android:id="@+id/imageView17"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:srcCompat="@mipmap/blueberry"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Blueberries are 3.4 miles away!" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$2.70 per pack" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tomatoview"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:layout_below="@id/orangeview"
+        android:layout_toRightOf="@id/orangeview"
+        android:layout_alignParentRight="true"
+
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageView16"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:srcCompat="@mipmap/tomato"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Tomatoes are 5 miles away!" />
+
+        <TextView
+            android:id="@+id/textView23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$2.30 per pack" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/spinachview"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+
+
+       android:layout_below="@id/orangeview"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/spinach" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Spinach is 3.2 miles away!" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$2.50 per pack" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/appleview"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:layout_above="@id/orangeview"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentRight="true"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:srcCompat="@mipmap/apple"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apples are 1.6 miles away!"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$ 2.30 per pound"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cherryview"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:layout_alignParentRight="true"
+        android:layout_margin="30dp"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/cherry" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cherries are 2.5 miles away!" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$ 1.60 per pound" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/figview"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:weightSum="3"
+        android:layout_above="@id/orangeview"
+        android:layout_marginLeft="30dp"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/fig" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Figs are 6 miles away!" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$4.20 per pound" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/grapeview"
+        android:layout_width="120dp"
+        android:layout_height="110dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:srcCompat="@mipmap/grapes" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Grapes are 4miles away" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$1.99 per pound" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/orangeview"
+        android:layout_width="120dp"
+
+        android:layout_height="110dp"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:weightSum="3"
+         android:outlineProvider="background"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="match_parent"
+
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            app:srcCompat="@mipmap/orange" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Oragne is 3 miles away!"
+            android:textSize="14dp" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="$2.99 per pound"
+            android:textSize="14dp" />
+    </LinearLayout>
+</RelativeLayout>
