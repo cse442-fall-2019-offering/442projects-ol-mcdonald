@@ -28,8 +28,10 @@ public class ZipActivity extends Dialog {
   Button but_check;
   EditText et_zip;
   LinearLayout linearLayout;
+  Context context;
   public ZipActivity(@NonNull Context context) {
     super(context);
+    this.context = context;
   }
 
   @Override
@@ -52,6 +54,9 @@ public class ZipActivity extends Dialog {
             @Override
             public void onClick(View view) {
               dismiss();
+              Intent intent = new Intent(context,LoginPageActivity.class);
+              context.startActivity(intent);
+
             }
           });
 

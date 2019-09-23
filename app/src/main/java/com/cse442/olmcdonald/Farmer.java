@@ -40,6 +40,7 @@ public class Farmer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 submit.setText("ADDED TO MARKET!");
+                finish();
             }
         });
 

@@ -50,7 +50,7 @@ public class LoginPageActivity extends AppCompatActivity {
 
     private void validate (String id, String userPassword) {
         if (id.equals("admin") && userPassword.equals("1234")) {
-            // go to another activity (Sprint #5)
+            finish();
         } else {
             ID.setText("");
             Password.setText("");

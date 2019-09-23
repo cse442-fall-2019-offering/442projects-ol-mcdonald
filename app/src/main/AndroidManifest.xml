@@ -17,9 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".peachActivity">
-
-        </activity>
+        <activity android:name=".peachActivity"/>
+        <activity android:name=".ZipActivity"></activity>
         <activity android:name=".appleActivity">
 
         </activity>
@@ -43,6 +42,16 @@
         </activity>
         <activity android:name=".orangeActivity">
 
+        </activity>
+        <activity
+            android:name=".SignUpActivity"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".LoginPageActivity"
+            android:label="@string/title_activity_login_page"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 

@@ -7,14 +7,26 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
     LinearLayout peachview, blueberryview,tomatoview,spinachview,appleview,cherryview,figview,grapeview,orangeview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(MainActivity.this,ZipActivity.class);
-        startActivity(intent);
+        ZipActivity zipActivity = new ZipActivity(this);
+        zipActivity.show();
+
+        FloatingActionButton fob = findViewById(R.id.float_add);
+        fob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,Farmer.class);
+                startActivity(intent);
+            }
+        });
+
         peachview=findViewById(R.id.peachview);
         blueberryview=findViewById(R.id.blueberryview);
         tomatoview=findViewById(R.id.tomatoview);
