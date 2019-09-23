@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+
 public class MainActivity extends AppCompatActivity {
     LinearLayout peachview, blueberryview,tomatoview,spinachview,appleview,cherryview,figview,grapeview,orangeview;
     @Override
