@@ -13,7 +13,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Intent intent = new Intent(MainActivity.this,ZipActivity.class);
+        startActivity(intent);
         peachview=findViewById(R.id.peachview);
         blueberryview=findViewById(R.id.blueberryview);
         tomatoview=findViewById(R.id.tomatoview);

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
