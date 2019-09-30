@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "644003499409",
+    "firebase_url": "https://ol-mcdonald.firebaseio.com",
+    "project_id": "ol-mcdonald",
+    "storage_bucket": "ol-mcdonald.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644003499409:android:a2cd6bc237744493cade30",
+        "android_client_info": {
+          "package_name": "com.cse442.olmcdonald"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644003499409-afau04t47s0d1qmqlgr0vqnegmlhrrgq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdK2dhgoFQAvnEoHeqi6b7AXwNlGJXNS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644003499409-afau04t47s0d1qmqlgr0vqnegmlhrrgq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
