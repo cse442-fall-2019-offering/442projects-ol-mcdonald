@@ -1,23 +1,32 @@
 package com.cse442.olmcdonald;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,16 +34,26 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 2;
     TextView txt_username;
     FirebaseUser user;
+    FirebaseFirestore item_db; //Item Database Instance
+    ArrayList<Item> itemArrayList;
+    ItemAdapter itemAdapter;
+    GridView gridview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        gridview = findViewById(R.id.gridview);
         setSupportActionBar(toolbar);
-        ZipActivity zipActivity = new ZipActivity(this);
-        //zipActivity.show();
+        item_db= FirebaseFirestore.getInstance();
+        itemArrayList = readItemFirebase();
         txt_username = findViewById(R.id.txt_username);
         user = FirebaseAuth.getInstance().getCurrentUser();
+
+        itemAdapter = new ItemAdapter(this,itemArrayList);
+        gridview.setAdapter(itemAdapter);
+
         FloatingActionButton fob = findViewById(R.id.fab);
         fob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,8 +62,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
+    private ArrayList<Item> readItemFirebase() {
+        final ArrayList<Item> retVal = new ArrayList<>();
+        item_db.collection("crops")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(ConstantClass.TAG, document.getId() + " => " + document.getData());
+                                Item i = new Item(document);
+                                retVal.add(i);
+                                itemAdapter.notifyDataSetChanged();
+                                Toast.makeText(MainActivity.this, "Who " + i.getSeller(), Toast.LENGTH_SHORT).show();
 
+                            }
+                        } else {
+                            Log.w(ConstantClass.TAG, "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+        return retVal;
     }
 
     private void start_login(){
