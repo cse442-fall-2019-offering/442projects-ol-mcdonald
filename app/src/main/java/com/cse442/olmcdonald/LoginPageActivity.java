@@ -26,7 +26,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Handle login activities
+ */
 public class LoginPageActivity extends AppCompatActivity {
     EditText et_lname;
     EditText et_fname;
@@ -37,6 +39,7 @@ public class LoginPageActivity extends AppCompatActivity {
     Button but_submit;
     FirebaseUser user;
     FirebaseFirestore user_db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,4 +163,14 @@ public class LoginPageActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Handle multiple Activity started
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(user.getDisplayName()!=null){
+            finish();
+        }
+    }
 }
