@@ -3,6 +3,7 @@ package com.cse442.olmcdonald;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore item_db; //Item Database Instance
     ArrayList<Item> itemArrayList;
     ItemAdapter itemAdapter;
+    TextView tv_marketword;
+    ConstraintLayout ct_layout;
     GridView gridview;
 
     @Override
@@ -45,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         gridview = findViewById(R.id.gridview);
+        tv_marketword = findViewById(R.id.tv_marketword);
+        ct_layout = findViewById(R.id.ct_layout);
         setSupportActionBar(toolbar);
         item_db= FirebaseFirestore.getInstance();
         itemArrayList = readItemFirebase();
@@ -64,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Read the crops from the database
+     * @return ArrayList of items
+     */
     private ArrayList<Item> readItemFirebase() {
         final ArrayList<Item> retVal = new ArrayList<>();
         item_db.collection("crops")
@@ -83,11 +92,17 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             Log.w(ConstantClass.TAG, "Error getting documents.", task.getException());
                         }
+                        if(!retVal.isEmpty()){
+                            ct_layout.removeView(tv_marketword);
+                        }
                     }
                 });
         return retVal;
     }
 
+    /**
+     * Initiate login activity
+     */
     private void start_login(){
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),

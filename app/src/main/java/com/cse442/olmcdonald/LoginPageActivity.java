@@ -160,4 +160,14 @@ public class LoginPageActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Handle multiple Activity started
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(user.getDisplayName()!=null){
+            finish();
+        }
+    }
 }
