@@ -70,14 +70,7 @@ public class Farmer extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean b_empty = true;
-                for(EditText et : editArray){
-                    if(et.getText().toString().equals("")){
-                        b_empty = false;
-                        et.setError("Field cannot be empty");
-                    }
-                }
-
+                boolean b_empty = check_fields_empty();
                 Map<String, Object> crop = new HashMap<>();
                 crop.put("product", product.getText().toString());
                 crop.put("price", price.getText().toString());
@@ -115,5 +108,17 @@ public class Farmer extends AppCompatActivity {
                 upload.setText("DONE!");
             }
         });
+    }
+
+    public boolean check_fields_empty(){
+
+        boolean b_empty = true;
+        for(EditText et : editArray){
+            if(et.getText().toString().equals("")){
+                b_empty = false;
+                et.setError("Field cannot be empty");
+            }
+        }
+        return b_empty;
     }
 }
