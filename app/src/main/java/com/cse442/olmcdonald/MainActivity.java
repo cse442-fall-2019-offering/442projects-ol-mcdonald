@@ -31,6 +31,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * MainActivity handles marketplace
+ */
 public class MainActivity extends AppCompatActivity {
     private static final int RC_SIGN_IN = 2;
     TextView txt_username;
@@ -86,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
                                 Item i = new Item(document);
                                 retVal.add(i);
                                 itemAdapter.notifyDataSetChanged();
-                                Toast.makeText(MainActivity.this, "Who " + i.getSeller(), Toast.LENGTH_SHORT).show();
 
                             }
                         } else {
@@ -161,7 +163,8 @@ public class MainActivity extends AppCompatActivity {
             start_login();
         } else  {
             String name = user.getDisplayName();
-            if (name == null || name.equals("")) {
+            String phone = user.getPhoneNumber();
+            if (name == null || name.equals("") || phone == null || phone.equals("")) {
                 Intent intent = new Intent(MainActivity.this, LoginPageActivity.class);
                 startActivity(intent);
             } else {

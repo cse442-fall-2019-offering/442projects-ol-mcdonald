@@ -26,7 +26,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Handles user registration 
+ */
 public class LoginPageActivity extends AppCompatActivity {
     EditText et_lname;
     EditText et_fname;
@@ -166,8 +168,5 @@ public class LoginPageActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(user.getDisplayName()!=null){
-            finish();
-        }
     }
 }
