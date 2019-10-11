@@ -1,5 +1,10 @@
 package com.cse442.olmcdonald;
 
+/**
+ * ConstantClass
+ */
 public class ConstantClass {
-    public static String TAG = "Ol'MCD Debug: ";
+    public static final int RC_SIGN_IN = 2;
+    public static String DEBUG_TAG = "Ol'MCD Debug: ";
+    public static String DB_CROPS = "crops";
 }

@@ -26,7 +26,6 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         Item i = getItem(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.activity_item_adapter, parent, false);
-
         }
         TextView tv_name = convertView.findViewById(R.id.tv_name);
         TextView tv_price = convertView.findViewById(R.id.tv_price);
@@ -37,7 +36,6 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         tv_name.setText(i.getName());
         tv_price.setText("Price: " + i.getPrice());
         tv_amount.setText("Amount: " + i.getAmount());
-        Log.d(ConstantClass.TAG,"test");
         return convertView;
     }
 }

@@ -6,6 +6,9 @@ import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 
+/**
+ * Manager class for shared functions
+ */
 public class itemManager {
     /**
      * Convert String Base64 into Bitmap

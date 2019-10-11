@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,22 +25,22 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import static com.cse442.olmcdonald.ConstantClass.RC_SIGN_IN;
 
 /**
  * MainActivity handles marketplace
+ *
  */
 public class MainActivity extends AppCompatActivity {
-    private static final int RC_SIGN_IN = 2;
-    TextView txt_username;
+    TextView tv_username;
+    TextView tv_marketword;
     FirebaseUser user;
-    FirebaseFirestore item_db; //Item Database Instance
+    FirebaseFirestore itemDb;
     ArrayList<Item> itemArrayList;
     ItemAdapter itemAdapter;
-    TextView tv_marketword;
     ConstraintLayout ct_layout;
     GridView gridview;
 
@@ -54,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
         tv_marketword = findViewById(R.id.tv_marketword);
         ct_layout = findViewById(R.id.ct_layout);
         setSupportActionBar(toolbar);
-        item_db= FirebaseFirestore.getInstance();
+        itemDb = FirebaseFirestore.getInstance();
         itemArrayList = readItemFirebase();
-        txt_username = findViewById(R.id.txt_username);
+        tv_username = findViewById(R.id.txt_username);
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         itemAdapter = new ItemAdapter(this,itemArrayList);
@@ -78,21 +77,19 @@ public class MainActivity extends AppCompatActivity {
      */
     private ArrayList<Item> readItemFirebase() {
         final ArrayList<Item> retVal = new ArrayList<>();
-        item_db.collection("crops")
+        itemDb.collection("crops")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d(ConstantClass.TAG, document.getId() + " => " + document.getData());
                                 Item i = new Item(document);
                                 retVal.add(i);
                                 itemAdapter.notifyDataSetChanged();
 
                             }
                         } else {
-                            Log.w(ConstantClass.TAG, "Error getting documents.", task.getException());
                         }
                         if(!retVal.isEmpty()){
                             ct_layout.removeView(tv_marketword);
@@ -107,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
      */
     private void start_login(){
         List<AuthUI.IdpConfig> providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.PhoneBuilder().build(),
-                new AuthUI.IdpConfig.GoogleBuilder().build());
+             //   new AuthUI.IdpConfig.EmailBuilder().build(),
+                //new AuthUI.IdpConfig.GoogleBuilder().build(),
+                new AuthUI.IdpConfig.PhoneBuilder().build());
         startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
@@ -154,6 +151,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Override resume to check if user is login, if not initiate login
+     */
     @Override
     protected void onResume() {
         super.onResume();
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, LoginPageActivity.class);
                 startActivity(intent);
             } else {
-                txt_username.setText("Welcome " + name + "!");
+                tv_username.setText("Welcome " + name + "!");
             }
         }
     }

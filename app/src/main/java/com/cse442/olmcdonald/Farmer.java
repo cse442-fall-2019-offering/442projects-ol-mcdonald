@@ -10,8 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 /**
  * Activity for Farmer's products
- *
- * @Author Jonathan
  */
 public class Farmer extends AppCompatActivity {
     private TextView amount;
