@@ -75,7 +75,7 @@ public class Farmer extends AppCompatActivity {
             public void onClick(View v) {
                 boolean not_empty = check_fields_empty();
                 if (not_empty) {
-                    addProduct();
+                    addItem();
                 }
             }
         });
@@ -99,7 +99,7 @@ public class Farmer extends AppCompatActivity {
     /**
      * Adds to the database for the product the user wants to sell
      */
-    public void addProduct() {
+    public void addItem() {
         Map<String, Object> crop = new HashMap<>();
         crop.put("product", product.getText().toString());
         crop.put("price", price.getText().toString());
