@@ -39,7 +39,7 @@ public class itemTest {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //itemNotNullTestData(document);
                                 Map<String,Object> map_data = document.getData();
-                                assertNotNull(map_data.get("price"));
+                                assertNotNull(map_data.get("et_price"));
                                 assertNotNull(map_data.get("amount"));
                                 assertNotNull(map_data.get("delivery"));
                                 assertNotNull(map_data.get("zipcode"));

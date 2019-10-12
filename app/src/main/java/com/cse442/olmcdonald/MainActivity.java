@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         fob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,Farmer.class);
+                Intent intent = new Intent(MainActivity.this, FarmerActivity.class);
                 startActivity(intent);
             }
         });

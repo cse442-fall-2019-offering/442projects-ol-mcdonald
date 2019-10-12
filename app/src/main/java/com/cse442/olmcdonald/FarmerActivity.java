@@ -4,12 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,54 +20,54 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Activity for Farmer's products
+ * Activity for FarmerActivity's products
  *
  * @Author Jonathan
  */
-public class Farmer extends AppCompatActivity {
-    EditText amount;
-    EditText address;
-    EditText description;
-    EditText price;
-    EditText product;
-    Button submit;
-    Button upload;
-    final EditText[] editArray = new EditText[6];
+public class FarmerActivity extends AppCompatActivity {
+    EditText et_amount;
+    EditText et_address;
+    EditText et_desc;
+    EditText et_price;
+    EditText et_name;
+    Button but_submit;
+    Button but_upload_img;
+    final EditText[] editArray = new EditText[5];
     FirebaseUser user;
-    FirebaseFirestore user_db;
+    FirebaseFirestore cropsDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer);
 
-        amount = findViewById(R.id.Amount);
-        address = findViewById(R.id.Address);
-        description = findViewById(R.id.Description);
-        price = findViewById(R.id.Price);
-        product = findViewById(R.id.Product);
-        submit = (Button) findViewById(R.id.SubmitBtn);
+        et_amount = findViewById(R.id.et_amount);
+        et_address = findViewById(R.id.et_address);
+        et_desc = findViewById(R.id.et_desc);
+        et_price = findViewById(R.id.et_price);
+        et_name = findViewById(R.id.et_name);
+        but_submit = findViewById(R.id.but_submit);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
-        user_db = FirebaseFirestore.getInstance();
-        upload = (Button) findViewById(R.id.img_Up);
+        cropsDb = FirebaseFirestore.getInstance();
+        but_upload_img = findViewById(R.id.but_upload_img);
 
-        editArray[0] = amount;
-        editArray[1] = address;
-        editArray[2] = description;
-        editArray[3] = price;
-        editArray[4] = product;
+        editArray[0] = et_amount;
+        editArray[1] = et_address;
+        editArray[2] = et_desc;
+        editArray[3] = et_price;
+        editArray[4] = et_name;
 
     }
 
     /**
-     * Once submit button is clicked it calls addProduct()
+     * Once but_submit button is clicked it calls addProduct()
      * to add to database
      *
      * @param view
      */
     public void submit_button(View view) {
-        submit.setOnClickListener(new View.OnClickListener() {
+        but_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean not_empty = check_fields_empty();
@@ -83,42 +80,43 @@ public class Farmer extends AppCompatActivity {
     }
 
     /**
-     * Uploads image of product to the database
+     * Uploads image of et_name to the database
      *
      * @param view
      */
     public void upload_img(View view) {
-        upload.setOnClickListener(new View.OnClickListener() {
+        but_upload_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upload.setText("DONE!");
+                but_upload_img.setText("DONE!");
             }
         });
     }
 
     /**
-     * Adds to the database for the product the user wants to sell
+     * Adds to the database for the et_name the user wants to sell
      */
     public void addItem() {
         Map<String, Object> crop = new HashMap<>();
-        crop.put("product", product.getText().toString());
-        crop.put("price", price.getText().toString());
-        crop.put("amount", amount.getText().toString());
-        crop.put("zipcode", address.getText().toString());
-        crop.put("description", description.getText().toString());
+        crop.put("name", et_name.getText().toString());
+        crop.put("price", et_price.getText().toString());
+        crop.put("amount", et_amount.getText().toString());
+        crop.put("zipcode", et_address.getText().toString());
+        crop.put("desc", et_desc.getText().toString());
 
-        user_db.collection("crops")
+        cropsDb.collection("crops")
                 .add(crop)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(Farmer.this, "Added to Market", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FarmerActivity.this, "Added to Market", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Farmer.this, "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FarmerActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
                 });
 

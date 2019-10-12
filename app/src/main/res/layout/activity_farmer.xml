@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F3F5F4"
-    tools:context=".Farmer">
+    tools:context=".FarmerActivity">
 
     <Button
-        android:id="@+id/img_Up"
+        android:id="@+id/but_upload_img"
         android:layout_width="126dp"
         android:layout_height="39dp"
         android:layout_marginTop="24dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/Address"
+        android:id="@+id/et_address"
         android:layout_width="200dp"
         android:layout_height="45dp"
         android:layout_marginTop="28dp"
@@ -36,10 +36,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.203"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Price" />
+        app:layout_constraintTop_toBottomOf="@+id/et_price" />
 
     <EditText
-        android:id="@+id/Price"
+        android:id="@+id/et_price"
         android:layout_width="139dp"
         android:layout_height="46dp"
         android:layout_marginTop="20dp"
@@ -50,11 +50,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.158"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Amount"
+        app:layout_constraintTop_toBottomOf="@+id/et_amount"
         tools:visibility="visible" />
 
     <Button
-        android:id="@+id/SubmitBtn"
+        android:id="@+id/but_submit"
         android:layout_width="126dp"
         android:layout_height="59dp"
         android:layout_marginTop="13dp"
@@ -69,11 +69,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.887"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Description"
+        app:layout_constraintTop_toBottomOf="@+id/et_desc"
         app:layout_constraintVertical_bias="0.071" />
 
     <EditText
-        android:id="@+id/Product"
+        android:id="@+id/et_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
@@ -87,20 +87,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/Amount"
+        android:id="@+id/et_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/amount_to_sell"
-        android:inputType="textPersonName"
+        android:inputType="numberSigned"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.202"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Product" />
+        app:layout_constraintTop_toBottomOf="@+id/et_name" />
 
     <EditText
-        android:id="@+id/Description"
+        android:id="@+id/et_desc"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="337dp"
         android:layout_height="165dp"
@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.446"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Address"
+        app:layout_constraintTop_toBottomOf="@+id/et_address"
         app:layout_constraintVertical_bias="0.521" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
