@@ -12,7 +12,7 @@
         android:id="@+id/but_upload_img"
         android:layout_width="126dp"
         android:layout_height="39dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_button"
         android:fontFamily="sans-serif-black"
@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/img_product" />
 
     <EditText
         android:id="@+id/et_zip"
@@ -126,5 +126,16 @@
         app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_date" />
+
+    <ImageView
+        android:id="@+id/img_product"
+        android:layout_width="126dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/alert_light_frame" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

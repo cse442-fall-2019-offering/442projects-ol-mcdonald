@@ -5,6 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -59,7 +62,9 @@ public class FarmerActivity extends AppCompatActivity {
         et_price = findViewById(R.id.et_price);
         et_name = findViewById(R.id.et_name);
         et_total = findViewById(R.id.et_total);
+
         but_submit = findViewById(R.id.but_submit);
+        img_product = findViewById(R.id.img_product);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         cropsDb = FirebaseFirestore.getInstance();
@@ -106,12 +111,6 @@ public class FarmerActivity extends AppCompatActivity {
                 Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-                if(img_uri != null){
-                    but_upload_img.setText("DONE!");
-                }
-                else{
-                    Toast.makeText(FarmerActivity.this,"No File Selected", Toast.LENGTH_SHORT);
-                }
 
             }
         });
@@ -130,8 +129,11 @@ public class FarmerActivity extends AppCompatActivity {
      * Adds to the database for the et_name the user wants to sell
      */
     public void addItem() {
+        Drawable drawable = img_product.getDrawable();
+        BitmapDrawable bitmapDrawable = ((BitmapDrawable) drawable);
+        Bitmap bitmap = bitmapDrawable.getBitmap();
+        String base_64 = itemManager.bitmapToBase64(bitmap);
 
-        img_product.setImageBitmap(itemManager.base64ToBitmap(img_product.toString()));
         Map<String, Object> crop = new HashMap<>();
         crop.put("name", et_name.getText().toString());
         crop.put("price", Float.valueOf(et_price.getText().toString()));
@@ -139,7 +141,7 @@ public class FarmerActivity extends AppCompatActivity {
         crop.put("zipcode", Integer.valueOf(et_zip.getText().toString()));
         crop.put("harvest", et_date.getText().toString());
         crop.put("total", Float.valueOf(et_total.getText().toString()));
-        crop.put("img",img_product);
+        crop.put("img",base_64);
 
 
         cropsDb.collection("crops")
