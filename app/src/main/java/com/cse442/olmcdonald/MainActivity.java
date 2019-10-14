@@ -11,6 +11,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     ItemAdapter itemAdapter;
     ConstraintLayout ct_layout;
     GridView gridview;
+    EditText et_zipcode;
+    Button but_zipcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +58,14 @@ public class MainActivity extends AppCompatActivity {
         ct_layout = findViewById(R.id.ct_layout);
         setSupportActionBar(toolbar);
         itemDb = FirebaseFirestore.getInstance();
-        itemArrayList = readItemFirebase();
+        itemArrayList = new ArrayList<>();
+        readItemFirebase(false);
         tv_username = findViewById(R.id.txt_username);
+        et_zipcode=findViewById(R.id.et_zipcode);
         user = FirebaseAuth.getInstance().getCurrentUser();
+        but_zipcode=findViewById(R.id.but_zipcode);
 
         itemAdapter = new ItemAdapter(this,itemArrayList);
-        gridview.setAdapter(itemAdapter);
 
         FloatingActionButton fob = findViewById(R.id.fab);
         fob.setOnClickListener(new View.OnClickListener() {
@@ -69,34 +75,66 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        but_zipcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String zipcodestrings= et_zipcode.getText().toString();
+                if(zipcodestrings.equals("")){
+                    readItemFirebase(false);
+
+                }else {
+                    readItemFirebase(true);
+                }
+
+            }
+        });
     }
 
     /**
-     * Read the crops from the database
-     * @return ArrayList of items
+     * it filters the item in the array by the range of the user typed in zipcode
      */
-    private ArrayList<Item> readItemFirebase() {
-        final ArrayList<Item> retVal = new ArrayList<>();
+    private void zipCodeFinder(){
+        for(int i=itemArrayList.size()-1;i>=0;i--){
+            String zipcodestring= et_zipcode.getText().toString();
+            int zipcode=Integer.parseInt(zipcodestring);
+            if((zipcode+20)<itemArrayList.get(i).getZipcode() ||  (zipcode-20)>itemArrayList.get(i).getZipcode()){
+                itemArrayList.remove(i);
+            }
+        }
+        itemAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     *
+     * Read the crops from the database and populate listView
+     * @param reset true to reset the item with zipcode filter
+     */
+    private void readItemFirebase(final boolean reset) {
         itemDb.collection("crops")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                           itemArrayList.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Item i = new Item(document);
-                                retVal.add(i);
-                                itemAdapter.notifyDataSetChanged();
 
+                                Item i = new Item(document);
+                                itemArrayList.add(i);
                             }
-                        } else {
+                            if(reset){
+                                zipCodeFinder();
+                            }
+                            itemAdapter.notifyDataSetChanged();
                         }
-                        if(!retVal.isEmpty()){
+                        if(!itemArrayList.isEmpty()){
                             ct_layout.removeView(tv_marketword);
+                        }
+                        if(gridview.getAdapter()==null) {
+                            gridview.setAdapter(itemAdapter);
                         }
                     }
                 });
-        return retVal;
     }
 
     /**
