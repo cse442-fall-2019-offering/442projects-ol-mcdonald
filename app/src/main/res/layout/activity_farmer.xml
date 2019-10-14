@@ -16,7 +16,6 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_button"
         android:fontFamily="sans-serif-black"
-        android:onClick="upload_img"
         android:text="@string/upload_image"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,9 +57,7 @@
         android:layout_width="126dp"
         android:layout_height="59dp"
         android:layout_marginBottom="32dp"
-        android:background="@drawable/round_button"
         android:fontFamily="sans-serif-black"
-        android:onClick="submit_button"
         android:text="@string/submit_btn"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/white"
@@ -83,6 +80,18 @@
         app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_delivery"
+        android:layout_width="123dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="106dp"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:hint="Delivery"
+        android:inputType="number|text"
+        app:layout_constraintStart_toEndOf="@+id/et_price"
+        app:layout_constraintTop_toBottomOf="@+id/but_upload_img" />
 
     <EditText
         android:id="@+id/et_amount"
@@ -120,7 +129,7 @@
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="Total amount you have in storage"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.136"
@@ -137,5 +146,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/alert_light_frame" />
+
+    <EditText
+        android:id="@+id/et_species"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Species"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_total" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
