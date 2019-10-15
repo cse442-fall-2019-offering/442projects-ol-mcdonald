@@ -27,8 +27,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
     ImageView image;
     Button buy;
 
-    FirebaseUser user;
-    FirebaseFirestore user_db;
+
 
     itemManager item_manager;
 
@@ -37,8 +36,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        user_db = FirebaseFirestore.getInstance();
+
 
         name = findViewById(R.id.Name);
         species = findViewById(R.id.Species);
@@ -53,7 +51,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
         buy = findViewById(R.id.Buy);
 
         Intent intent = getIntent();
-        Item item = (Item) intent.getSerializableExtra("Item Selected");
+        //Item item = (Item) intent.getSerializableExtra("Item Selected");
+        Item item = (Item) intent.getParcelableExtra("Item Selected");
 
         setDetails(item);
     }
@@ -70,6 +69,6 @@ public class ItemDetailsActivity extends AppCompatActivity {
         total.setText("per " + item.getTotal() + "unit(s)");
 
         item_manager = new itemManager();
-        image.setImageBitmap(item_manager.base64ToBitmap(item.getImg_data()));
+        image.setImageBitmap((item.getImg_data()));
     }
 }
