@@ -2,12 +2,13 @@ package com.cse442.olmcdonald;
 
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * Item Class to hold information about the Item
  */
-public class Item {
+public class Item implements Serializable {
     private String name;
     private String seller;
     private String species;

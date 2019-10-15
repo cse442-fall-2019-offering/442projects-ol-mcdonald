@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,6 +61,16 @@ public class MainActivity extends AppCompatActivity {
 
         itemAdapter = new ItemAdapter(this,itemArrayList);
         gridview.setAdapter(itemAdapter);
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent cropDetails = new Intent(MainActivity.this, ItemDetailsActivity.class);
+                Item selectedCrop = itemArrayList.get(position);
+                cropDetails.putExtra("Item Selected", selectedCrop);
+                startActivity(cropDetails);
+            }
+        });
 
         FloatingActionButton fob = findViewById(R.id.fab);
         fob.setOnClickListener(new View.OnClickListener() {
