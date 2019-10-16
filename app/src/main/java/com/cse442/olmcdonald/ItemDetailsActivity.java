@@ -8,12 +8,6 @@ import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Button;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import com.cse442.olmcdonald.itemManager;
-
 public class ItemDetailsActivity extends AppCompatActivity {
     TextView name;
     TextView species;
@@ -22,12 +16,9 @@ public class ItemDetailsActivity extends AppCompatActivity {
     TextView zipcode;
     TextView delivery;
     TextView amount;
-    TextView price;
-    TextView total;
+    TextView total_price;
     ImageView image;
     Button buy;
-
-
 
     itemManager item_manager;
 
@@ -36,8 +27,6 @@ public class ItemDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
 
-
-
         name = findViewById(R.id.Name);
         species = findViewById(R.id.Species);
         seller = findViewById(R.id.Seller);
@@ -45,8 +34,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
         zipcode = findViewById(R.id.Zipcode);
         delivery = findViewById(R.id.Delivery);
         amount = findViewById(R.id.Amount);
-        price = findViewById(R.id.Price);
-        total = findViewById(R.id.Total);
+        total_price = findViewById(R.id.TotalPrice);
         image = findViewById(R.id.Image);
         buy = findViewById(R.id.Buy);
 
@@ -65,8 +53,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
         zipcode.setText("Crop's zipcode location: " + item.getZipcode());
         delivery.setText("Delivery distance: " + item.getDelivery_distance());
         amount.setText("Amount left to be sold: " + item.getAmount());
-        price.setText("Price: " + item.getPrice());
-        total.setText("per " + item.getTotal() + "unit(s)");
+        total_price.setText("Price: " + item.getPrice() + "per " + item.getTotal() + "unit(s)");
 
         item_manager = new itemManager();
         image.setImageBitmap((item.getImg_data()));
