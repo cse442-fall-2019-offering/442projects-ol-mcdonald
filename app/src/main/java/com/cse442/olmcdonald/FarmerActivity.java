@@ -126,7 +126,7 @@ public class FarmerActivity extends AppCompatActivity {
         try {
             Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), img_uri);
             ByteArrayOutputStream out = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 50, out);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, out);
             decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
             compressedBitmap = Bitmap.createScaledBitmap(decoded, decoded.getWidth()/10,decoded.getHeight()/10, false);
         } catch (IOException e) {
