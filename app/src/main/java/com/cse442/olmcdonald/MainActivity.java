@@ -190,6 +190,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
+            case R.id.refresh:
+                readItemFirebase(false);
+                return true;
             case R.id.setting:
                 return true;
             case R.id.login_out:
