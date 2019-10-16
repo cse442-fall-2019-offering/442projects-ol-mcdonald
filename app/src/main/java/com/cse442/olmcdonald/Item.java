@@ -9,6 +9,17 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.io.Serializable;
 import java.util.Map;
 
+import static com.cse442.olmcdonald.ConstantClass.DB_AMOUNT;
+import static com.cse442.olmcdonald.ConstantClass.DB_DELIVERY;
+import static com.cse442.olmcdonald.ConstantClass.DB_HARVEST;
+import static com.cse442.olmcdonald.ConstantClass.DB_IMG;
+import static com.cse442.olmcdonald.ConstantClass.DB_NAME;
+import static com.cse442.olmcdonald.ConstantClass.DB_PRICE;
+import static com.cse442.olmcdonald.ConstantClass.DB_SELLER;
+import static com.cse442.olmcdonald.ConstantClass.DB_SPECIES;
+import static com.cse442.olmcdonald.ConstantClass.DB_TOTAL;
+import static com.cse442.olmcdonald.ConstantClass.DB_ZIPCODE;
+
 /**
  * Item Class to hold information about the Item
  */
@@ -26,16 +37,16 @@ public class Item implements Parcelable {
 
     public Item(QueryDocumentSnapshot d){
         Map<String,Object> map_data = d.getData();
-        this.price = Float.valueOf(map_data.get("price").toString());
-        this.amount = Integer.valueOf(map_data.get("amount").toString());
-        this.delivery_distance = Integer.valueOf(map_data.get("delivery").toString());
-        this.zipcode = Integer.valueOf(map_data.get("zipcode").toString());
-        this.total = Integer.valueOf(map_data.get("total").toString());
-        this.harvest_date = map_data.get("harvest").toString();
-        this.img_data = itemManager.base64ToBitmap(map_data.get("img").toString());
-        this.name = map_data.get("name").toString();
-        this.species = map_data.get("species").toString();
-        this.seller = map_data.get("seller").toString();
+        this.price = Float.valueOf(map_data.get(DB_PRICE).toString());
+        this.amount = Integer.valueOf(map_data.get(DB_AMOUNT).toString());
+        this.delivery_distance = Integer.valueOf(map_data.get(DB_DELIVERY).toString());
+        this.zipcode = Integer.valueOf(map_data.get(DB_ZIPCODE).toString());
+        this.total = Integer.valueOf(map_data.get(DB_TOTAL).toString());
+        this.harvest_date = map_data.get(DB_HARVEST).toString();
+        this.img_data = itemManager.base64ToBitmap(map_data.get(DB_IMG).toString());
+        this.name = map_data.get(DB_NAME).toString();
+        this.species = map_data.get(DB_SPECIES).toString();
+        this.seller = map_data.get(DB_SELLER).toString();
     }
 
     public Item(Parcel parcel) {

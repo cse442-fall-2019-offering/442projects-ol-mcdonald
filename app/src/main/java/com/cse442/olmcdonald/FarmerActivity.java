@@ -29,6 +29,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.cse442.olmcdonald.ConstantClass.DB_AMOUNT;
+import static com.cse442.olmcdonald.ConstantClass.DB_CROPS;
+import static com.cse442.olmcdonald.ConstantClass.DB_DELIVERY;
+import static com.cse442.olmcdonald.ConstantClass.DB_HARVEST;
+import static com.cse442.olmcdonald.ConstantClass.DB_IMG;
+import static com.cse442.olmcdonald.ConstantClass.DB_NAME;
+import static com.cse442.olmcdonald.ConstantClass.DB_PRICE;
+import static com.cse442.olmcdonald.ConstantClass.DB_SELLER;
+import static com.cse442.olmcdonald.ConstantClass.DB_SPECIES;
+import static com.cse442.olmcdonald.ConstantClass.DB_TOTAL;
+import static com.cse442.olmcdonald.ConstantClass.DB_ZIPCODE;
+
 /**
  * Activity for FarmerActivity's products
  *
@@ -66,21 +78,17 @@ public class FarmerActivity extends AppCompatActivity {
         et_total = findViewById(R.id.et_total);
         et_delivery = findViewById(R.id.et_delivery);
         et_species = findViewById(R.id.et_species);
-
         but_submit = findViewById(R.id.but_submit);
         img_product = findViewById(R.id.img_product);
-
         user = FirebaseAuth.getInstance().getCurrentUser();
         cropsDb = FirebaseFirestore.getInstance();
         but_upload_img = findViewById(R.id.but_upload_img);
-
         but_upload_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
                 galleryIntent.setType("image/*");
                 startActivityForResult(galleryIntent, RESULT_LOAD_IMAGE);
-
             }
         });
         but_submit.setOnClickListener(new View.OnClickListener() {
@@ -132,17 +140,17 @@ public class FarmerActivity extends AppCompatActivity {
         }
         String ba =itemManager.bitmapToBase64(compressedBitmap);
         Map<String, Object> crop = new HashMap<>();
-        crop.put("name", et_name.getText().toString());
-        crop.put("seller", user.getDisplayName());
-        crop.put("price", et_price.getText().toString());
-        crop.put("amount", et_amount.getText().toString());
-        crop.put("zipcode", et_zip.getText().toString());
-        crop.put("delivery", et_delivery.getText().toString());
-        crop.put("harvest", et_date.getText().toString());
-        crop.put("species", et_date.getText().toString());
-        crop.put("total", et_total.getText().toString());
-        crop.put("img",ba);
-        cropsDb.collection("crops")
+        crop.put(DB_NAME, et_name.getText().toString());
+        crop.put(DB_SELLER, user.getDisplayName());
+        crop.put(DB_PRICE, et_price.getText().toString());
+        crop.put(DB_AMOUNT, et_amount.getText().toString());
+        crop.put(DB_ZIPCODE, et_zip.getText().toString());
+        crop.put(DB_DELIVERY, et_delivery.getText().toString());
+        crop.put(DB_HARVEST, et_date.getText().toString());
+        crop.put(DB_SPECIES, et_date.getText().toString());
+        crop.put(DB_TOTAL, et_total.getText().toString());
+        crop.put(DB_IMG,ba);
+        cropsDb.collection(DB_CROPS)
                 .add(crop)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -177,7 +185,6 @@ public class FarmerActivity extends AppCompatActivity {
                 et.setError("Field cannot be empty");
             }
         }
-
         return b_empty;
     }
 

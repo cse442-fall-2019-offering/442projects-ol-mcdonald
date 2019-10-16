@@ -31,6 +31,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.cse442.olmcdonald.ConstantClass.DB_CROPS;
 import static com.cse442.olmcdonald.ConstantClass.RC_SIGN_IN;
 
 /**
@@ -54,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         gridview = findViewById(R.id.gridview);
         tv_marketword = findViewById(R.id.tv_marketword);
         ct_layout = findViewById(R.id.ct_layout);
-        setSupportActionBar(toolbar);
         itemDb = FirebaseFirestore.getInstance();
         itemArrayList = new ArrayList<>();
         readItemFirebase(false);
@@ -65,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         et_zipcode=findViewById(R.id.et_zipcode);
         user = FirebaseAuth.getInstance().getCurrentUser();
         but_zipcode=findViewById(R.id.but_zipcode);
-
         itemAdapter = new ItemAdapter(this,itemArrayList);
         gridview.setAdapter(itemAdapter);
 
@@ -122,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
      * @param reset true to reset the item with zipcode filter
      */
     private void readItemFirebase(final boolean reset) {
-        itemDb.collection("crops")
+        itemDb.collection(DB_CROPS)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -172,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             IdpResponse response = IdpResponse.fromResultIntent(data);
             if (resultCode == RESULT_OK) {
-                // Successfully signed in
             } else {
 
             }

@@ -1,9 +1,7 @@
 package com.cse442.olmcdonald;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,14 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
-import com.google.firebase.FirebaseTooManyRequestsException;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +24,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
+
+import static com.cse442.olmcdonald.ConstantClass.DB_USERNAME;
+import static com.cse442.olmcdonald.ConstantClass.DB_USER_EMAIL;
+import static com.cse442.olmcdonald.ConstantClass.DB_USER_FNAME;
+import static com.cse442.olmcdonald.ConstantClass.DB_USER_LNAME;
+import static com.cse442.olmcdonald.ConstantClass.DB_USER_NAME;
+import static com.cse442.olmcdonald.ConstantClass.DB_USER_PHONE;
+import static com.cse442.olmcdonald.ConstantClass.DB_USER_ZIP;
 
 
 /**
@@ -94,8 +93,8 @@ public class LoginPageActivity extends AppCompatActivity {
      * Initiate view in the layout
      */
     private void initView() {
-        et_lname = findViewById(R.id.et_fname);
-        et_fname = findViewById(R.id.et_lname);
+        et_lname = findViewById(R.id.et_lname);
+        et_fname = findViewById(R.id.et_fname);
         et_uname = findViewById(R.id.et_username);
         et_number = findViewById(R.id.et_number);
         et_zip = findViewById(R.id.et_zip);
@@ -161,7 +160,7 @@ public class LoginPageActivity extends AppCompatActivity {
      * @param username The username input to be checked
      */
     public void checkUsername(final String username){
-        userDb.collection("users").get()
+        userDb.collection(DB_USERNAME).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -169,7 +168,7 @@ public class LoginPageActivity extends AppCompatActivity {
                         boolean track = true;
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(document.getData().get("username").equals(username)){
+                                if(document.getData().get(DB_USER_NAME).equals(username)){
                                     track = false;
                                 }
                             }
@@ -189,13 +188,13 @@ public class LoginPageActivity extends AppCompatActivity {
      */
     private void updateUserdb() {
         Map<String, Object> userMap = new HashMap<>();
-        userMap.put("zipcode", et_zip.getText().toString());
-        userMap.put("username", et_uname.getText().toString());
-        userMap.put("first_name", et_fname.getText().toString());
-        userMap.put("last_name", et_lname.getText().toString());
-        userMap.put("email", et_email.getText().toString());
-        userMap.put("phone", et_number.getText().toString());
-        userDb.collection("users")
+        userMap.put(DB_USER_ZIP, et_zip.getText().toString());
+        userMap.put(DB_USER_NAME, et_uname.getText().toString());
+        userMap.put(DB_USER_FNAME, et_fname.getText().toString());
+        userMap.put(DB_USER_LNAME, et_lname.getText().toString());
+        userMap.put(DB_USER_EMAIL, et_email.getText().toString());
+        userMap.put(DB_USER_PHONE, et_number.getText().toString());
+        userDb.collection(DB_USERNAME)
                 .add(userMap)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
