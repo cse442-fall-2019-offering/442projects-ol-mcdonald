@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         user = FirebaseAuth.getInstance().getCurrentUser();
-        readItemFirebase();
+        readItemFirebase(false);
         if(user==null) {
             Toast.makeText(this, "Welcome, Please Sign up", Toast.LENGTH_SHORT).show();
             start_login();
