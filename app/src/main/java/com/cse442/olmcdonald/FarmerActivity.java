@@ -7,14 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,7 +32,6 @@ import java.util.Map;
 /**
  * Activity for FarmerActivity's products
  *
- * @Author Jonathan
  */
 public class FarmerActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE =1;
@@ -51,6 +45,7 @@ public class FarmerActivity extends AppCompatActivity {
     EditText et_species;
     Button but_submit;
     Button but_upload_img;
+    ViewDialog viewDialog;
 
     final EditText[] editArray = new EditText[8];
     FirebaseUser user;
@@ -62,7 +57,7 @@ public class FarmerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_farmer);
-
+        viewDialog = new ViewDialog(this);
         et_amount = findViewById(R.id.et_amount);
         et_zip = findViewById(R.id.et_zip);
         et_date = findViewById(R.id.et_date);
@@ -93,6 +88,7 @@ public class FarmerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean not_empty = check_fields_empty();
                 if (not_empty) {
+                    viewDialog.showDialog();
                     addItem();
                 }
             }
@@ -152,6 +148,7 @@ public class FarmerActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         Toast.makeText(FarmerActivity.this, "Added to Market", Toast.LENGTH_SHORT).show();
+                        viewDialog.closeDialog();
                         finish();
                     }
                 })
@@ -159,6 +156,7 @@ public class FarmerActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(FarmerActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        viewDialog.closeDialog();
                     }
                 });
 
