@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         fob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,Farmer.class);
+                Intent intent = new Intent(MainActivity.this, FarmerActivity.class);
                 startActivity(intent);
             }
         });
@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        readItemFirebase();
         if(user==null) {
             Toast.makeText(this, "Welcome, Please Sign up", Toast.LENGTH_SHORT).show();
             start_login();
