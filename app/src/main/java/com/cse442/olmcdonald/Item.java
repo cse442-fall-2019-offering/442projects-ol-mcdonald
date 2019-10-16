@@ -1,18 +1,23 @@
 package com.cse442.olmcdonald;
 
+import android.graphics.Bitmap;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * Item Class to hold information about the Item
  */
-public class Item {
+public class Item implements Parcelable {
     private String name;
     private String seller;
     private String species;
     private String harvest_date;
-    private String img_data;
+    private Bitmap img_data;
     private int zipcode;
     private int amount;
     private float price;
@@ -27,10 +32,25 @@ public class Item {
         this.zipcode = Integer.valueOf(map_data.get("zipcode").toString());
         this.total = Integer.valueOf(map_data.get("total").toString());
         this.harvest_date = map_data.get("harvest").toString();
-        this.img_data = map_data.get("img").toString();
+        this.img_data = itemManager.base64ToBitmap(map_data.get("img").toString());
         this.name = map_data.get("name").toString();
         this.species = map_data.get("species").toString();
         this.seller = map_data.get("seller").toString();
+    }
+
+    public Item(Parcel parcel) {
+        String[] data = new String[10];
+        parcel.readStringArray(data);
+        this.price = Float.valueOf(data[9]);
+        this.amount = Integer.valueOf(data[8]);
+        this.delivery_distance = Integer.valueOf(data[7]);
+        this.zipcode = Integer.valueOf(data[6]);
+        this.total = Integer.valueOf(data[5]);
+        this.harvest_date = data[4];
+        this.img_data = itemManager.base64ToBitmap(data[3]);
+        this.name = data[2];
+        this.species =data[1];
+        this.seller = data[0];
     }
 
     public String getName() {
@@ -65,11 +85,11 @@ public class Item {
         this.harvest_date = harvest_date;
     }
 
-    public String getImg_data() {
+    public Bitmap getImg_data() {
         return img_data;
     }
 
-    public void setImg_data(String img_data) {
+    public void setImg_data(Bitmap img_data) {
         this.img_data = img_data;
     }
 
@@ -112,4 +132,30 @@ public class Item {
     public void setTotal(int total) {
         this.total = total;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeStringArray(new String[]{this.getSeller(),getSpecies(),getName(),
+                itemManager.bitmapToBase64(getImg_data()),getHarvest_date(), String.valueOf(getTotal()),
+                String.valueOf(getZipcode()), String.valueOf(getDelivery_distance()), String.valueOf(getAmount()), String.valueOf(getPrice())});
+    }
+
+
+    public static final Parcelable.Creator<Item> CREATOR = new Creator<Item>(){
+
+        @Override
+        public Item createFromParcel(Parcel parcel) {
+            return new Item(parcel);
+        }
+
+        @Override
+        public Item[] newArray(int i) {
+            return new Item[i];
+        }
+    };
 }

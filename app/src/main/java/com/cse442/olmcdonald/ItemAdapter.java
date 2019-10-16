@@ -32,7 +32,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         TextView tv_amount = convertView.findViewById(R.id.tv_amount);
         ImageView img_view = convertView.findViewById(R.id.imageView);
         img_view.setAdjustViewBounds(true);
-        img_view.setImageBitmap(itemManager.base64ToBitmap(i.getImg_data()));
+        img_view.setImageBitmap(i.getImg_data());
         tv_name.setText(i.getName());
         tv_price.setText("Price: " + i.getPrice());
         tv_amount.setText("Amount: " + i.getAmount());
