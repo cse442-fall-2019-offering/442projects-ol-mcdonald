@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                            itemArrayList.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
                                 Item i = new Item(document);
                                 itemArrayList.add(i);
                             }

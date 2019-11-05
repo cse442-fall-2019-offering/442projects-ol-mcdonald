@@ -20,6 +20,7 @@ public class ConstantClass {
     public static String DB_NAME = "name";
     public static String DB_SPECIES = "species";
     public static String DB_SELLER = "seller";
+    public static String DB_ID = "id";
 
     public static String DB_USER_ZIP = "zipcode";
     public static String DB_USER_NAME = "username";

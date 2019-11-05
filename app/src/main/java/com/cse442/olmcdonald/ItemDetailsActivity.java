@@ -2,11 +2,18 @@ package com.cse442.olmcdonald;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Button;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ItemDetailsActivity extends AppCompatActivity {
     TextView name;
@@ -19,14 +26,18 @@ public class ItemDetailsActivity extends AppCompatActivity {
     TextView total_price;
     ImageView image;
     Button buy;
+    FloatingActionButton fab;
+    FirebaseUser user;
 
     itemManager item_manager;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
-
+        fab = findViewById(R.id.fab_edit);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         name = findViewById(R.id.Name);
         species = findViewById(R.id.Species);
         seller = findViewById(R.id.Seller);
@@ -39,9 +50,21 @@ public class ItemDetailsActivity extends AppCompatActivity {
         buy = findViewById(R.id.Buy);
 
         Intent intent = getIntent();
-        Item item = (Item) intent.getParcelableExtra("Item Selected");
+        final Item item = (Item) intent.getParcelableExtra("Item Selected");
 
         setDetails(item);
+        if(user.getDisplayName().equals(item.getSeller())) {
+            fab.setVisibility(View.VISIBLE);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ItemDetailsActivity.this,FarmerActivity.class);
+                    intent.putExtra("item",item);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
     }
 
     private void setDetails(Item item) {

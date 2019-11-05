@@ -12,6 +12,7 @@ import java.util.Map;
 import static com.cse442.olmcdonald.ConstantClass.DB_AMOUNT;
 import static com.cse442.olmcdonald.ConstantClass.DB_DELIVERY;
 import static com.cse442.olmcdonald.ConstantClass.DB_HARVEST;
+import static com.cse442.olmcdonald.ConstantClass.DB_ID;
 import static com.cse442.olmcdonald.ConstantClass.DB_IMG;
 import static com.cse442.olmcdonald.ConstantClass.DB_NAME;
 import static com.cse442.olmcdonald.ConstantClass.DB_PRICE;
@@ -24,6 +25,7 @@ import static com.cse442.olmcdonald.ConstantClass.DB_ZIPCODE;
  * Item Class to hold information about the Item
  */
 public class Item implements Parcelable {
+    private String id;
     private String name;
     private String seller;
     private String species;
@@ -47,11 +49,13 @@ public class Item implements Parcelable {
         this.name = map_data.get(DB_NAME).toString();
         this.species = map_data.get(DB_SPECIES).toString();
         this.seller = map_data.get(DB_SELLER).toString();
+        this.id = d.getId();
     }
 
     public Item(Parcel parcel) {
-        String[] data = new String[10];
+        String[] data = new String[11];
         parcel.readStringArray(data);
+        this.id = data[10];
         this.price = Float.valueOf(data[9]);
         this.amount = Integer.valueOf(data[8]);
         this.delivery_distance = Integer.valueOf(data[7]);
@@ -62,6 +66,14 @@ public class Item implements Parcelable {
         this.name = data[2];
         this.species =data[1];
         this.seller = data[0];
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -153,7 +165,7 @@ public class Item implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeStringArray(new String[]{this.getSeller(),getSpecies(),getName(),
                 itemManager.bitmapToBase64(getImg_data()),getHarvest_date(), String.valueOf(getTotal()),
-                String.valueOf(getZipcode()), String.valueOf(getDelivery_distance()), String.valueOf(getAmount()), String.valueOf(getPrice())});
+                String.valueOf(getZipcode()), String.valueOf(getDelivery_distance()), String.valueOf(getAmount()), String.valueOf(getPrice()),getId()});
     }
 
 
