@@ -1,19 +1,27 @@
 package com.cse442.olmcdonald;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import static com.cse442.olmcdonald.ConstantClass.DB_CROPS;
+import static com.cse442.olmcdonald.ConstantClass.DEBUG_TAG;
 
 public class ItemDetailsActivity extends AppCompatActivity {
     TextView name;
@@ -27,7 +35,9 @@ public class ItemDetailsActivity extends AppCompatActivity {
     ImageView image;
     Button buy;
     FloatingActionButton fab;
+    FloatingActionButton fab_remove;
     FirebaseUser user;
+    FirebaseFirestore cropsDb;
 
     itemManager item_manager;
 
@@ -36,7 +46,9 @@ public class ItemDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
+        cropsDb = FirebaseFirestore.getInstance();
         fab = findViewById(R.id.fab_edit);
+        fab_remove = findViewById(R.id.fab_remove);
         user = FirebaseAuth.getInstance().getCurrentUser();
         name = findViewById(R.id.Name);
         species = findViewById(R.id.Species);
@@ -54,7 +66,34 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
         setDetails(item);
         if(user.getDisplayName().equals(item.getSeller())) {
+            final ViewDialog viewDialog = new ViewDialog(this);
             fab.setVisibility(View.VISIBLE);
+            fab_remove.setVisibility(View.VISIBLE);
+            fab_remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    viewDialog.showDialog();
+                    cropsDb.collection(DB_CROPS).document(item.getId())
+                            .delete()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d(DEBUG_TAG, "DocumentSnapshot successfully deleted!");
+                                    Toast.makeText(ItemDetailsActivity.this, "Item Removed", Toast.LENGTH_SHORT).show();
+                                    viewDialog.closeDialog();
+                                    finish();
+                                    }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(ItemDetailsActivity.this, "Error removing!", Toast.LENGTH_SHORT).show();
+                                    Log.w(DEBUG_TAG, "Error deleting document", e);
+                                    viewDialog.closeDialog();
+                                }
+                            });
+                }
+            });
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
