@@ -199,6 +199,10 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 return true;
+            case R.id.editProfile:
+                Intent intent = new Intent(MainActivity.this,LoginPageActivity.class);
+                startActivity(intent);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
