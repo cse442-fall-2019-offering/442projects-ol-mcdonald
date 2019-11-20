@@ -195,11 +195,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.listings:
                 //
-                for(Item i : itemArrayList){
-                    if (! i.getSeller().equals(user.getDisplayName())){
-                        itemArrayList.remove(i);
+                for(int index =0;index<itemArrayList.size();index++){
+                    if(!itemArrayList.get(index).getSeller().equals(user.getDisplayName())){
+                        itemArrayList.remove(index);
                     }
                 }
+
                 itemAdapter.notifyDataSetChanged();
                 return true;
             case R.id.login_out:
