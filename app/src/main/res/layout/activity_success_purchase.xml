@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SuccessPurchase">
+
+    <TextView
+        android:id="@+id/finalmessage1"
+        android:layout_width="372dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="104dp"
+        android:text="EIEIO! Your purchase has been processed succesfully! "
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/finalmessage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Thank you for using our app!"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finalmessage1" />
+
+    <TextView
+        android:id="@+id/redirectlink"
+        android:layout_width="258dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="108dp"
+        android:text="Click here to go back to the market"
+        android:textAlignment="center"
+        android:textColor="#2196F3"
+        android:textColorLink="#2196F3"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/finalmessage2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
