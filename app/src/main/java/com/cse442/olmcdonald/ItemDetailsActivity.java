@@ -104,6 +104,14 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 }
             });
         }
+
+        buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent purchaseIntent = new Intent(ItemDetailsActivity.this, PurchasePage.class);
+                startActivity(purchaseIntent);
+            }
+        });
     }
 
     private void setDetails(Item item) {

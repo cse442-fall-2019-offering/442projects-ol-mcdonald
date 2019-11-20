@@ -15,6 +15,8 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SuccessPurchase"></activity>
+        <activity android:name=".PurchasePage" />
         <activity
             android:name=".ItemAdapter"
             android:screenOrientation="portrait" />
