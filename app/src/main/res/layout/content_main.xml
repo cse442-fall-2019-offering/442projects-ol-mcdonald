@@ -61,6 +61,8 @@
         android:layout_height="46dp"
         android:layout_marginTop="14dp"
         android:text="find"
+        android:textColor="@android:color/white"
+        android:background="#43a92c"
         app:layout_constraintStart_toEndOf="@+id/et_zipcode"
         app:layout_constraintTop_toTopOf="parent" />
 
