@@ -50,9 +50,9 @@ public class ItemDetailsActivity extends AppCompatActivity {
         seller.setText("Seller: " + item.getSeller());
         harvest.setText("Harvest date: " + item.getHarvest_date());
         zipcode.setText("Crop's zipcode location: " + item.getZipcode());
-        delivery.setText("Delivery distance: " + item.getDelivery_distance());
+        delivery.setText("Delivery distance: " + item.getDelivery_distance() + " miles");
         amount.setText("Amount left to be sold: " + item.getAmount());
-        total_price.setText("Price: " + item.getPrice() + "per " + item.getTotal() + "unit(s)");
+        total_price.setText("Price: " + item.getPrice() + " per " + item.getTotal() + " unit(s)");
         item_manager = new itemManager();
         image.setImageBitmap((item.getImg_data()));
     }
