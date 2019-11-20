@@ -193,11 +193,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.refresh:
                 readItemFirebase(false);
                 return true;
-            case R.id.transactions:
-                Intent intent = new Intent(MainActivity.this,Transactions.class);
-                intent.putExtra("Items",itemArrayList);
-                startActivity(intent);
-
+            case R.id.listings:
+                //
+                for(Item i : itemArrayList){
+                    if (! i.getSeller().equals(user.getDisplayName())){
+                        itemArrayList.remove(i);
+                    }
+                }
+                itemAdapter.notifyDataSetChanged();
+                return true;
             case R.id.login_out:
                 FirebaseAuth.getInstance().signOut();
                 finish();
