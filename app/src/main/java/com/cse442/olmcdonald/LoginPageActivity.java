@@ -252,20 +252,34 @@ public class LoginPageActivity extends AppCompatActivity {
      * Update all entries of the items to the new seller username
      */
     private void updateItemUsername(){
-            itemDb.collection(DB_CROPS)
+        viewDialog.showDialog();
+
+        itemDb.collection(DB_CROPS)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
+                                int ref = task.getResult().size();
                                 for (QueryDocumentSnapshot document : task.getResult()) {
+                                    ref--;
+                                    if(ref == 0){
+                                        Map h = document.getData();
+                                        h.put(DB_SELLER,user.getDisplayName());
+                                        itemDb.collection((DB_CROPS)).document(document.getId()).update(h).addOnSuccessListener(new OnSuccessListener() {
+                                            @Override
+                                            public void onSuccess(Object o) {
+                                                viewDialog.closeDialog();
+                                                finish();
+                                            }
+                                        });
+                                    }
                                     if(document.getData().get(DB_SELLER).equals(curName)){
                                         Map h = document.getData();
                                         h.put(DB_SELLER,user.getDisplayName());
                                        itemDb.collection((DB_CROPS)).document(document.getId()).update(h);
                                     }
                                 }
-                                finish();
 
                             }
                         }
