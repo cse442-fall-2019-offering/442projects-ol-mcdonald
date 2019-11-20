@@ -192,7 +192,15 @@ public class MainActivity extends AppCompatActivity {
             case R.id.refresh:
                 readItemFirebase(false);
                 return true;
-            case R.id.setting:
+            case R.id.listings:
+                //
+                for(int index =itemArrayList.size()-1;index>=0;index--){
+                    if(!itemArrayList.get(index).getSeller().equals(user.getDisplayName())){
+                        itemArrayList.remove(index);
+                    }
+                }
+
+                itemAdapter.notifyDataSetChanged();
                 return true;
             case R.id.login_out:
                 FirebaseAuth.getInstance().signOut();
