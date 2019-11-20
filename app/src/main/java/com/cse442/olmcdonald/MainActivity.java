@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.listings:
                 //
-                for(int index =0;index<itemArrayList.size();index++){
+                for(int index =itemArrayList.size()-1;index>=0;index--){
                     if(!itemArrayList.get(index).getSeller().equals(user.getDisplayName())){
                         itemArrayList.remove(index);
                     }
