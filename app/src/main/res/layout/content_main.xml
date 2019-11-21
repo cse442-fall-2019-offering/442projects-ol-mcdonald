@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="192dp"
         android:layout_marginTop="28dp"
+        android:fontFamily="monospace"
         android:text="Marketplace is empty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
