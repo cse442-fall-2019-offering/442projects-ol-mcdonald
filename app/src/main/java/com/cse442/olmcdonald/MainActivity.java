@@ -113,8 +113,11 @@ public class MainActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager =
                 (InputMethodManager) this.getSystemService(
                         Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(
-                this.getCurrentFocus().getWindowToken(), 0);
+        if(getCurrentFocus()!=null){
+            inputMethodManager.hideSoftInputFromWindow(
+                    this.getCurrentFocus().getWindowToken(), 0);
+        }
+
     }
 
     /**

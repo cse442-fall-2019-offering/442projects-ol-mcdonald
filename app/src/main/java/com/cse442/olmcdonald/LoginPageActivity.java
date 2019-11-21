@@ -68,6 +68,7 @@ public class LoginPageActivity extends AppCompatActivity {
         if(user!=null) {
             if (user.getEmail() != null) {
                 et_email.setText(user.getEmail());
+//                et_email.setEnabled(false);
             }
             if (user.getPhoneNumber()!= null) {
                 et_number.setText(user.getPhoneNumber());
@@ -133,15 +134,26 @@ public class LoginPageActivity extends AppCompatActivity {
                         Toast.makeText(LoginPageActivity.this, "Updating Profile!", Toast.LENGTH_SHORT).show();
                         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                                 .setDisplayName(et_uname.getText().toString())
+
                                 .build();
                         user.updateProfile(profileUpdates)
                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
-                                            updateUser();
+                                        user.updateEmail(et_email.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                updateUser();
+                                            }
+                                        });
                                         }
-                                    }});
+                                    }}).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                updateUser();
+                            }
+                        });
                     }
                 }
             }
@@ -218,7 +230,7 @@ public class LoginPageActivity extends AppCompatActivity {
     }
 
     /**
-     * Update username of the user in the databse
+     * Update username of the user in the database
      */
     private void updateUser(){
         userDb.collection(DB_USERNAME).get()
@@ -264,15 +276,22 @@ public class LoginPageActivity extends AppCompatActivity {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     ref--;
                                     if(ref == 0){
-                                        Map h = document.getData();
-                                        h.put(DB_SELLER,user.getDisplayName());
-                                        itemDb.collection((DB_CROPS)).document(document.getId()).update(h).addOnSuccessListener(new OnSuccessListener() {
-                                            @Override
-                                            public void onSuccess(Object o) {
-                                                viewDialog.closeDialog();
-                                                finish();
-                                            }
-                                        });
+                                        if(document.getData().get(DB_SELLER).equals(curName)) {
+
+                                            Map h = document.getData();
+                                            h.put(DB_SELLER, user.getDisplayName());
+                                            itemDb.collection((DB_CROPS)).document(document.getId()).update(h).addOnSuccessListener(new OnSuccessListener() {
+                                                @Override
+                                                public void onSuccess(Object o) {
+                                                    viewDialog.closeDialog();
+                                                    finish();
+                                                }
+                                            });
+                                        } else{
+                                            viewDialog.closeDialog();
+                                            finish();
+                                            break;
+                                        }
                                     }
                                     if(document.getData().get(DB_SELLER).equals(curName)){
                                         Map h = document.getData();
