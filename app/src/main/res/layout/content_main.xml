@@ -5,6 +5,7 @@
     android:id="@+id/ct_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
@@ -60,6 +61,8 @@
         android:layout_height="46dp"
         android:layout_marginTop="14dp"
         android:text="find"
+        android:textColor="@android:color/white"
+        android:background="#43a92c"
         app:layout_constraintStart_toEndOf="@+id/et_zipcode"
         app:layout_constraintTop_toTopOf="parent" />
 

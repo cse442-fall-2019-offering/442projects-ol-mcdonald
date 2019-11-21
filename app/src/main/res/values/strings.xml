@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ol`McDonald</string>
+    <string name="app_name">CropShop</string>
     <string name="submit_btn">Submit</string>
     <string name="name_of_product">Name of Product</string>
     <string name="amount_to_sell">How much will you sell?</string>
