@@ -30,7 +30,6 @@ public class ItemDetailsActivity extends AppCompatActivity {
     TextView harvest;
     TextView zipcode;
     TextView delivery;
-    TextView amount;
     TextView total_price;
     ImageView image;
     Button buy;
@@ -56,7 +55,6 @@ public class ItemDetailsActivity extends AppCompatActivity {
         harvest = findViewById(R.id.Harvest);
         zipcode = findViewById(R.id.Zipcode);
         delivery = findViewById(R.id.Delivery);
-        amount = findViewById(R.id.Amount);
         total_price = findViewById(R.id.TotalPrice);
         image = findViewById(R.id.Image);
         buy = findViewById(R.id.Buy);
@@ -67,6 +65,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
         setDetails(item);
         if(user.getDisplayName().equals(item.getSeller())) {
             final ViewDialog viewDialog = new ViewDialog(this);
+            buy.setVisibility(View.INVISIBLE);
             fab.setVisibility(View.VISIBLE);
             fab_remove.setVisibility(View.VISIBLE);
             fab_remove.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +108,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent purchaseIntent = new Intent(ItemDetailsActivity.this, PurchasePage.class);
+                purchaseIntent.putExtra("item",item);
                 startActivity(purchaseIntent);
             }
         });
@@ -121,7 +121,6 @@ public class ItemDetailsActivity extends AppCompatActivity {
         harvest.setText("Harvest date: " + item.getHarvest_date());
         zipcode.setText("Crop's zipcode location: " + item.getZipcode());
         delivery.setText("Delivery distance: " + item.getDelivery_distance() + " miles");
-        amount.setText("Amount left to be sold: " + item.getAmount());
         total_price.setText("Price: " + item.getPrice() + " per " + item.getTotal() + " unit(s)");
         item_manager = new itemManager();
         image.setImageBitmap((item.getImg_data()));

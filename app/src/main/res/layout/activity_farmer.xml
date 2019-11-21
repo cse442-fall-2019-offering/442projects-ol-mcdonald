@@ -14,6 +14,7 @@
         android:layout_height="39dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/colorAccent"
         android:fontFamily="sans-serif-black"
         android:text="@string/upload_image"
         android:textColor="@android:color/white"
@@ -49,8 +50,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintStart_toStartOf="@+id/et_amount"
-        app:layout_constraintTop_toBottomOf="@+id/et_amount"
+        app:layout_constraintStart_toStartOf="@+id/et_total"
+        app:layout_constraintTop_toBottomOf="@+id/et_total"
         tools:visibility="visible" />
 
     <Button
@@ -58,6 +59,7 @@
         android:layout_width="126dp"
         android:layout_height="59dp"
         android:layout_marginBottom="32dp"
+        android:background="@color/colorAccent"
         android:fontFamily="sans-serif-black"
         android:text="@string/submit_btn"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
@@ -100,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/et_species" />
 
     <EditText
-        android:id="@+id/et_amount"
+        android:id="@+id/et_total"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
@@ -129,21 +131,6 @@
         app:layout_constraintStart_toStartOf="@+id/et_zip"
         app:layout_constraintTop_toBottomOf="@+id/et_zip" />
 
-    <EditText
-        android:id="@+id/et_total"
-        android:layout_width="235dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/edit_text"
-        android:ems="10"
-        android:hint="Amount you have in storage"
-        android:inputType="number"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/et_date"
-        app:layout_constraintTop_toBottomOf="@+id/et_date" />
-
     <ImageView
         android:id="@+id/img_product"
         android:layout_width="126dp"
@@ -167,7 +154,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/et_total"
-        app:layout_constraintTop_toBottomOf="@+id/et_total" />
+        app:layout_constraintStart_toStartOf="@+id/et_date"
+        app:layout_constraintTop_toBottomOf="@+id/et_date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

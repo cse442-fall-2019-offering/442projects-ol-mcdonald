@@ -145,7 +145,12 @@
             android:id="@+id/but_sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/submit_btn" />
+            android:background="@color/colorAccent"
+            android:padding="10dp"
+            android:text="@string/submit_btn"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

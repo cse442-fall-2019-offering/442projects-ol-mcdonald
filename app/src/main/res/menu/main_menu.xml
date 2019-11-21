@@ -6,10 +6,11 @@
     <item
         android:id="@+id/refresh"
         android:title="All Listings" />
+    <item
+        android:id="@+id/editProfile"
+        android:title="Edit Profile" />
     <item android:id="@+id/login_out"
         android:title="Logout" />
-    <item android:id="@+id/editProfile"
-        android:title="Edit Profile" />
 
 
 </menu>

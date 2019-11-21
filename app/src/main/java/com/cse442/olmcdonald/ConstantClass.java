@@ -11,7 +11,6 @@ public class ConstantClass {
 
 
     public static String DB_PRICE = "price";
-    public static String DB_AMOUNT = "amount";
     public static String DB_DELIVERY = "delivery";
     public static String DB_ZIPCODE = "zipcode";
     public static String DB_TOTAL = "total";

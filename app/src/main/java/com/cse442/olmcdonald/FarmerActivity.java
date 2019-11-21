@@ -30,7 +30,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.cse442.olmcdonald.ConstantClass.DB_AMOUNT;
 import static com.cse442.olmcdonald.ConstantClass.DB_CROPS;
 import static com.cse442.olmcdonald.ConstantClass.DB_DELIVERY;
 import static com.cse442.olmcdonald.ConstantClass.DB_HARVEST;
@@ -49,7 +48,6 @@ import static com.cse442.olmcdonald.ConstantClass.DEBUG_TAG;
  */
 public class FarmerActivity extends AppCompatActivity {
     private static final int RESULT_LOAD_IMAGE =1;
-    EditText et_amount;
     EditText et_zip;
     EditText et_date;
     EditText et_price;
@@ -61,7 +59,7 @@ public class FarmerActivity extends AppCompatActivity {
     Button but_upload_img;
     ViewDialog viewDialog;
 
-    final EditText[] editArray = new EditText[8];
+    final EditText[] editArray = new EditText[7];
     FirebaseUser user;
     FirebaseFirestore cropsDb;
     ImageView img_product;
@@ -73,7 +71,6 @@ public class FarmerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_farmer);
         item = (Item) getIntent().getParcelableExtra("item");
         viewDialog = new ViewDialog(this);
-        et_amount = findViewById(R.id.et_amount);
         et_zip = findViewById(R.id.et_zip);
         et_date = findViewById(R.id.et_date);
         et_price = findViewById(R.id.et_price);
@@ -108,18 +105,17 @@ public class FarmerActivity extends AppCompatActivity {
                 }
             }
         });
-        editArray[0] = et_amount;
-        editArray[1] = et_zip;
-        editArray[2] = et_date;
-        editArray[3] = et_price;
-        editArray[4] = et_name;
-        editArray[5] = et_total;
-        editArray[6] = et_delivery;
-        editArray[7] = et_species;
+        editArray[0] = et_zip;
+        editArray[1] = et_date;
+        editArray[2] = et_price;
+        editArray[3] = et_name;
+        editArray[4] = et_total;
+        editArray[5] = et_delivery;
+        editArray[6] = et_species;
 
         if(item!=null){
-            et_amount.setText(String.valueOf(item.getAmount()));
             et_zip.setText(String.valueOf(item.getZipcode()));
+            et_total.setText(String.valueOf(item.getTotal()));
             et_date.setText(item.getHarvest_date());
             et_price.setText(String.valueOf(item.getPrice()));
             et_name.setText(item.getName());
@@ -187,7 +183,6 @@ public class FarmerActivity extends AppCompatActivity {
         crop.put(DB_NAME, et_name.getText().toString());
         crop.put(DB_SELLER, user.getDisplayName());
         crop.put(DB_PRICE, et_price.getText().toString());
-        crop.put(DB_AMOUNT, et_amount.getText().toString());
         crop.put(DB_ZIPCODE, et_zip.getText().toString());
         crop.put(DB_DELIVERY, et_delivery.getText().toString());
         crop.put(DB_HARVEST, et_date.getText().toString());
