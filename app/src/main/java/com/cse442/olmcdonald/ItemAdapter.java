@@ -35,7 +35,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         img_view.setImageBitmap(i.getImg_data());
         tv_name.setText(i.getName());
         tv_price.setText("Price: " + i.getPrice());
-        tv_amount.setText("Amount: " + i.getAmount());
+        tv_amount.setText("Amount: " + i.getTotal());
         return convertView;
     }
 }

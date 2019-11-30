@@ -40,6 +40,13 @@ public class ViewDialog {
     }
 
     /**
+     * Return if dialog is showing
+     * @return is Dialog showing
+     */
+    public  boolean isShowing(){
+        return dialog.isShowing();
+    }
+    /**
      * Close the loading dialog
      */
     public void closeDialog(){

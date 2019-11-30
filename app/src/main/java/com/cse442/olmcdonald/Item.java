@@ -6,10 +6,8 @@ import android.os.Parcelable;
 
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.io.Serializable;
 import java.util.Map;
 
-import static com.cse442.olmcdonald.ConstantClass.DB_AMOUNT;
 import static com.cse442.olmcdonald.ConstantClass.DB_DELIVERY;
 import static com.cse442.olmcdonald.ConstantClass.DB_HARVEST;
 import static com.cse442.olmcdonald.ConstantClass.DB_IMG;
@@ -24,13 +22,13 @@ import static com.cse442.olmcdonald.ConstantClass.DB_ZIPCODE;
  * Item Class to hold information about the Item
  */
 public class Item implements Parcelable {
+    private String id;
     private String name;
     private String seller;
     private String species;
     private String harvest_date;
     private Bitmap img_data;
     private int zipcode;
-    private int amount;
     private float price;
     private int delivery_distance;
     private int total;
@@ -38,7 +36,6 @@ public class Item implements Parcelable {
     public Item(QueryDocumentSnapshot d){
         Map<String,Object> map_data = d.getData();
         this.price = Float.valueOf(map_data.get(DB_PRICE).toString());
-        this.amount = Integer.valueOf(map_data.get(DB_AMOUNT).toString());
         this.delivery_distance = Integer.valueOf(map_data.get(DB_DELIVERY).toString());
         this.zipcode = Integer.valueOf(map_data.get(DB_ZIPCODE).toString());
         this.total = Integer.valueOf(map_data.get(DB_TOTAL).toString());
@@ -47,13 +44,14 @@ public class Item implements Parcelable {
         this.name = map_data.get(DB_NAME).toString();
         this.species = map_data.get(DB_SPECIES).toString();
         this.seller = map_data.get(DB_SELLER).toString();
+        this.id = d.getId();
     }
 
     public Item(Parcel parcel) {
         String[] data = new String[10];
         parcel.readStringArray(data);
-        this.price = Float.valueOf(data[9]);
-        this.amount = Integer.valueOf(data[8]);
+        this.id = data[9];
+        this.price = Float.valueOf(data[8]);
         this.delivery_distance = Integer.valueOf(data[7]);
         this.zipcode = Integer.valueOf(data[6]);
         this.total = Integer.valueOf(data[5]);
@@ -62,6 +60,14 @@ public class Item implements Parcelable {
         this.name = data[2];
         this.species =data[1];
         this.seller = data[0];
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -112,13 +118,6 @@ public class Item implements Parcelable {
         this.zipcode = zipcode;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
 
     public float getPrice() {
         return price;
@@ -153,7 +152,7 @@ public class Item implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeStringArray(new String[]{this.getSeller(),getSpecies(),getName(),
                 itemManager.bitmapToBase64(getImg_data()),getHarvest_date(), String.valueOf(getTotal()),
-                String.valueOf(getZipcode()), String.valueOf(getDelivery_distance()), String.valueOf(getAmount()), String.valueOf(getPrice())});
+                String.valueOf(getZipcode()), String.valueOf(getDelivery_distance()), String.valueOf(getPrice()),getId()});
     }
 
 

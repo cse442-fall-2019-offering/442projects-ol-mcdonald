@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,11 +52,12 @@ public class MainActivity extends AppCompatActivity {
     GridView gridview;
     EditText et_zipcode;
     Button but_zipcode;
-
+    ViewDialog viewDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewDialog = new ViewDialog(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         gridview = findViewById(R.id.gridview);
@@ -62,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         ct_layout = findViewById(R.id.ct_layout);
         itemDb = FirebaseFirestore.getInstance();
         itemArrayList = new ArrayList<>();
-        readItemFirebase(false);
         tv_username = findViewById(R.id.txt_username);
         et_zipcode=findViewById(R.id.et_zipcode);
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -98,9 +100,24 @@ public class MainActivity extends AppCompatActivity {
                 }else {
                     readItemFirebase(true);
                 }
+                hideKeyboard();
 
             }
         });
+    }
+
+    /**
+     * Hide keyboard
+     */
+    public void hideKeyboard(){
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) this.getSystemService(
+                        Activity.INPUT_METHOD_SERVICE);
+        if(getCurrentFocus()!=null){
+            inputMethodManager.hideSoftInputFromWindow(
+                    this.getCurrentFocus().getWindowToken(), 0);
+        }
+
     }
 
     /**
@@ -123,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
      * @param reset true to reset the item with zipcode filter
      */
     private void readItemFirebase(final boolean reset) {
+        viewDialog.showDialog();
         itemDb.collection(DB_CROPS)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -131,13 +149,13 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                            itemArrayList.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
                                 Item i = new Item(document);
                                 itemArrayList.add(i);
                             }
                             if(reset){
                                 zipCodeFinder();
                             }
+                            viewDialog.closeDialog();
                             itemAdapter.notifyDataSetChanged();
                         }
                         if(!itemArrayList.isEmpty()){
@@ -193,11 +211,23 @@ public class MainActivity extends AppCompatActivity {
             case R.id.refresh:
                 readItemFirebase(false);
                 return true;
-            case R.id.setting:
+            case R.id.listings:
+                //
+                for(int index =itemArrayList.size()-1;index>=0;index--){
+                    if(!itemArrayList.get(index).getSeller().equals(user.getDisplayName())){
+                        itemArrayList.remove(index);
+                    }
+                }
+
+                itemAdapter.notifyDataSetChanged();
                 return true;
             case R.id.login_out:
                 FirebaseAuth.getInstance().signOut();
                 finish();
+                return true;
+            case R.id.editProfile:
+                Intent intent = new Intent(MainActivity.this,LoginPageActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
